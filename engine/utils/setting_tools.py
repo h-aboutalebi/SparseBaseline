@@ -53,11 +53,11 @@ def get_agent_type(state_dim, action_dim, max_action, args, env, device):
                            nb_observations=env.observation_space.shape[0], min_action=float(min(env.action_space.low)), lr_actor=args.lr_actor)
     elif (args.algo == "SAC"):
         agent = SAC(state_dim, action_dim, max_action, action_space=env.action_space,
-                    gamma=args.gamma_sac, alpha=args.alpha_sac, tau=args.tau_sac, policy=args.policy_sac, device=device, start_steps=args.start_steps)
+                    gamma=args.gamma_sac, alpha=args.alpha_sac, tau=args.tau_sac, policy=args.policy_sac, automatic_entropy_tuning=args.automatic_entropy_tuning, device=device, start_steps=args.start_steps)
         memory = ReplayBuffer_SAC(args.buffer_size)
     elif (args.algo == "SAC_POLYRL"):
         agent = SAC_Poly_RL(state_dim, action_dim, max_action, action_space=env.action_space,
-                    gamma=args.gamma_sac, alpha=args.alpha_sac, tau=args.tau_sac, policy=args.policy_sac, device=device, start_steps=args.start_steps,
+                    gamma=args.gamma_sac, alpha=args.alpha_sac, tau=args.tau_sac, policy=args.policy_sac, automatic_entropy_tuning=args.automatic_entropy_tuning, device=device, start_steps=args.start_steps,
                     betta = args.betta, epsilon = args.epsilon,sigma_squared = args.sigma_squared, lambda_ = args.lambda_, nb_actions = env.action_space.shape[0],
                     nb_observations =env.observation_space.shape[0], min_action = float(min(env.action_space.low)))
         memory = ReplayBuffer_SAC(args.buffer_size)
