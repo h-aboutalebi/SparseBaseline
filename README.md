@@ -1,6 +1,6 @@
-# SparceReward
+# SparseReward
 
-This package provides comprehensive tools for examining rl algorithms on sparce and non-sparce environments.
+This package provides comprehensive tools for examining rl algorithms on sparse and non-sparse environments.
 
 At current version, we only offer Mujoco environment for tests. Current supported algorithms are as follows:
 
@@ -12,7 +12,7 @@ At current version, we only offer Mujoco environment for tests. Current supporte
 
 4- ...
 
-In the directory  ``engine/reward_modifier``, we provide different sparcity version for environments.
+In the directory  ``engine/reward_modifier``, we provide different sparsity version for environments.
 
 The typical code to run the program is as follows:
 
@@ -21,10 +21,10 @@ The typical code to run the program is as follows:
 If you want to change the environment you should type:
 
 ``` python3 main.py --env_name Ant-v2```
-The environments by defualt are non-sparce. You can make argument sparce by using the following command:
+The environments by defualt are non-sparse. You can make argument sparse by using the following command:
 
-``` python3 main.py --env_name Ant-v2 --sparse_reward --threshold_sparcity 0.05```
-where ``--sparse_reward`` makes the environment's reward sparce and ``--threshold_sparcity`` determines the extent of sparcity.
+``` python3 main.py --env_name Ant-v2 --sparse_reward --threshold_sparsity 0.05```
+where ``--sparse_reward`` makes the environment's reward sparse and ``--threshold_sparsity`` determines the extent of sparsity.
 
 If you want to change the algorithm to run: 
 
