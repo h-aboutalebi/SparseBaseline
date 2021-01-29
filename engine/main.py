@@ -55,9 +55,9 @@ parser.add_argument('--threshold_sparcity', type=float, default=1.15, metavar='G
 
 # *********************************** Algorithm Setting ********************************************
 
-parser.add_argument('--algo', default='DDPG',
+parser.add_argument('--algo', default='FIGAR',
                     help='Current supported algorithms to use: DDPG | DDPG_DIV | DDPG_PARAM | '
-                         'DDPG_POLYRL | DDPG_NO_NOISE | DDPG_OU_NOISE | SAC | SAC_POLYRL')
+                         'DDPG_POLYRL | DDPG_NO_NOISE | DDPG_OU_NOISE | SAC | SAC_POLYRL | FIGAR')
 
 # *********************************** DDPG Setting ********************************************
 
@@ -123,6 +123,8 @@ parser.add_argument('--start_steps', type=int, default=10000,
 
 parser.add_argument('--automatic_entropy_tuning', action='store_true',
                     help='for making reward sparse. Default=False')
+parser.add_argument('-w','--w_figar', type=int, default=10,
+                    help='FIGAR length of repetition')
 
 # *********************************** SAC_Poly_Rl Setting ********************************************
 args = parser.parse_args()
@@ -179,7 +181,7 @@ path_file_result = file_path_results + "/results.pkl"
 new_run = Run_RL(reward_modifier=reward_modifier, num_steps=int(args.num_steps), update_interval=args.update_interval,
                  eval_interval=args.eval_interval,
                  mini_batch_size=args.mini_batch_size, agent=agent, env=env, memory=memory,
-                 path_file_result=path_file_result)
+                 path_file_result=path_file_result,gamma=args.gamma)
 start_time = time.time()
 new_run.run(start_time, writer)
 logger.info("results saved in file {}".format(path_file_result))

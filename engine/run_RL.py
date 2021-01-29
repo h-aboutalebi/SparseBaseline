@@ -18,8 +18,9 @@ logger = logging.getLogger(__name__)
 class Run_RL():
 
     def __init__(self, reward_modifier, num_steps, memory, update_interval, eval_interval,
-                 mini_batch_size, agent, env, path_file_result):
+                 mini_batch_size, agent, env, path_file_result,gamma):
         self.num_steps = num_steps
+        self.gamma=gamma
         self.update_interval = update_interval
         self.eval_interval = eval_interval
         self.agent = agent
@@ -56,8 +57,16 @@ class Run_RL():
             # update_parameters()
             action = select_action_agent(state=states[-1], previous_action=actions[-1], tensor_board_writer=writer
                                          , step_number=step_number, nb_environment_reset=self.nb_env_reset, agent=self.agent)
-            next_state, reward, done, info_ = self.env.step(action)
-
+            if(self.agent.__class__.__name__ is not "Figar"):
+                next_state, reward, done, info_ = self.env.step(action)
+            else:
+                total_reward=0
+                for intra_step in range(action[1]):
+                    next_state, reward, done, info_ = self.env.step(action[0])
+                    total_reward+=self.gamma**(intra_step)*reward
+                    if(done):
+                        break
+                reward=total_reward
             post_update_agent(agent=self.agent, previous_state=states[-1], next_state=next_state,
                               done=done, step_number=step_number, writer=writer)
             if (done):

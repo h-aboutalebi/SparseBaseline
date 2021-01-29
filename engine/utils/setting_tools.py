@@ -7,6 +7,7 @@ from engine.algorithms.DDPG_No_Noise.ddpg_no_noise import DDPG_No_Noise
 from engine.algorithms.DDPG_OU_NOISE.ddpg_ou_noise import DDPG_Ou_Noise
 from engine.algorithms.DDPG_PARAMNOISE.ddpg_param_noise import DDPG_Param_Noise
 from engine.algorithms.DDPG_POLYRL.ddpg import DDPGPolyRL
+from engine.algorithms.FIGAR.figar import Figar
 from engine.algorithms.SAC.replay_momory import ReplayBuffer_SAC
 from engine.algorithms.SAC.sac import SAC
 from engine.algorithms.SAC_POLYRL.sac_polyRl import SAC_Poly_RL
@@ -61,6 +62,11 @@ def get_agent_type(state_dim, action_dim, max_action, args, env, device):
                     betta = args.betta, epsilon = args.epsilon,sigma_squared = args.sigma_squared, lambda_ = args.lambda_, nb_actions = env.action_space.shape[0],
                     nb_observations =env.observation_space.shape[0], min_action = float(min(env.action_space.low)))
         memory = ReplayBuffer_SAC(args.buffer_size)
+    elif (args.algo == "FIGAR"):
+        memory = ReplayBuffer(args.buffer_size)
+        agent = Figar(state_dim, action_dim, max_action, expl_noise=args.expl_noise,
+                     action_high=env.action_space.high, action_low=env.action_space.low, tau=args.tau,
+                     device=device, lr_actor=args.lr_actor, W=args.w_figar)
     else:
         logger.info("Algorithm {} has not yet implemented! please select among 'DDPG, PARAM_DDPG, POLYRL_DDPG, DIV_DDPG'".format(args.algo))
         raise NotImplementedError
