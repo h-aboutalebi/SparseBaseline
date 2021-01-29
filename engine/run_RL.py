@@ -109,7 +109,10 @@ class Run_RL():
             while (True):
                 action = select_action_target(state=state, previous_action=actions[-1], tensor_board_writer=writer
                                               , step_number=step_number, nb_environment_reset=self.nb_env_reset, agent=self.agent)
-                state, reward, done, info_ = self.env.step(action)
+                if (self.agent.__class__.__name__ is not "Figar"):
+                    state, reward, done, info_ = self.env.step(action)
+                else:
+                    state, reward, done, info_ = self.env.step(action[0])
                 total_reward += reward
                 actions.append(action)
                 modified_reward = self.reward_modifier.make_reward_sparse(reward, self.initial_x)
