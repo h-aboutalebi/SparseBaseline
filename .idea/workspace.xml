@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5acc3d49-96ae-4eb6-8d00-5677bf241615" name="Default Changelist" comment="first">
-      <change afterPath="$PROJECT_DIR$/engine/algorithms/maxent/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engine/algorithms/maxent/maxn.py" afterDir="false" />
+    <list default="true" id="5acc3d49-96ae-4eb6-8d00-5677bf241615" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/algorithms/maxent/maxn.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/algorithms/maxent/maxn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/run_RL.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/run_RL.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/utils/setting_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/utils/setting_tools.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +55,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/engine/main.py" />
-      <option name="PARAMETERS" value="-w 5" />
+      <option name="PARAMETERS" value="-w 5 --algo MAXNET --start_steps 10" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -80,7 +82,7 @@
       <workItem from="1611838018943" duration="1070000" />
       <workItem from="1611854802176" duration="3988000" />
       <workItem from="1611881276171" duration="9003000" />
-      <workItem from="1616890759256" duration="327000" />
+      <workItem from="1616890759256" duration="5501000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1608680582675</created>
@@ -110,7 +112,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611928630011</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="first">
+      <created>1616891091256</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1616891091256</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,18 +134,18 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="336" y="125" key="#Deployment/0.0.1440.900@0.0.1440.900" timestamp="1611883740533" />
-    <state x="369" y="25" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1611888229723">
+    <state x="223" y="96" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1616894337030">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="369" y="25" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1611888229723" />
-    <state x="600" y="502" width="474" height="398" key="#xdebugger.evaluate" timestamp="1611928537096">
+    <state x="223" y="96" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1616894337030" />
+    <state x="579" y="457" width="474" height="398" key="#xdebugger.evaluate" timestamp="1616897655644">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="600" y="502" width="474" height="398" key="#xdebugger.evaluate/0.0.1440.900@0.0.1440.900" timestamp="1611928537096" />
-    <state x="294" y="23" key="CommitChangelistDialog2" timestamp="1611928816905">
+    <state x="579" y="457" width="474" height="398" key="#xdebugger.evaluate/0.0.1440.900@0.0.1440.900" timestamp="1616897655644" />
+    <state x="294" y="23" key="CommitChangelistDialog2" timestamp="1616891091066">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="294" y="23" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1611928816905" />
+    <state x="294" y="23" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1616891091066" />
     <state x="144" y="79" key="DiffContextDialog" timestamp="1611928827552">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -145,41 +154,41 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="579" y="187" key="EnvironmentVariablesDialog/0.0.1440.900@0.0.1440.900" timestamp="1611838596616" />
-    <state width="1398" height="268" key="GridCell.Tab.0.bottom" timestamp="1611960076838">
+    <state width="1398" height="232" key="GridCell.Tab.0.bottom" timestamp="1616897875204">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="268" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1611960076838" />
-    <state width="1398" height="268" key="GridCell.Tab.0.center" timestamp="1611960076837">
+    <state width="1398" height="232" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1616897875204" />
+    <state width="1398" height="232" key="GridCell.Tab.0.center" timestamp="1616897875203">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="268" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1611960076837" />
-    <state width="1398" height="268" key="GridCell.Tab.0.left" timestamp="1611960076835">
+    <state width="1398" height="232" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1616897875203" />
+    <state width="1398" height="232" key="GridCell.Tab.0.left" timestamp="1616897875202">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="268" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1611960076835" />
-    <state width="1398" height="268" key="GridCell.Tab.0.right" timestamp="1611960076837">
+    <state width="1398" height="232" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1616897875202" />
+    <state width="1398" height="232" key="GridCell.Tab.0.right" timestamp="1616897875203">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="268" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1611960076837" />
-    <state width="1398" height="385" key="GridCell.Tab.1.bottom" timestamp="1611960076829">
+    <state width="1398" height="232" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1616897875203" />
+    <state width="1398" height="232" key="GridCell.Tab.1.bottom" timestamp="1616897875206">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="385" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1611960076829" />
+    <state width="1398" height="232" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1616897875206" />
     <state width="1398" height="304" key="GridCell.Tab.1.bottom/0.23.1440.820@0.23.1440.820" timestamp="1611888862841" />
-    <state width="1398" height="385" key="GridCell.Tab.1.center" timestamp="1611960076828">
+    <state width="1398" height="232" key="GridCell.Tab.1.center" timestamp="1616897875205">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="385" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1611960076828" />
+    <state width="1398" height="232" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1616897875205" />
     <state width="1398" height="304" key="GridCell.Tab.1.center/0.23.1440.820@0.23.1440.820" timestamp="1611888862840" />
-    <state width="1398" height="385" key="GridCell.Tab.1.left" timestamp="1611960076827">
+    <state width="1398" height="232" key="GridCell.Tab.1.left" timestamp="1616897875204">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="385" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1611960076827" />
+    <state width="1398" height="232" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1616897875204" />
     <state width="1398" height="304" key="GridCell.Tab.1.left/0.23.1440.820@0.23.1440.820" timestamp="1611888862840" />
-    <state width="1398" height="385" key="GridCell.Tab.1.right" timestamp="1611960076828">
+    <state width="1398" height="232" key="GridCell.Tab.1.right" timestamp="1616897875205">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="385" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1611960076828" />
+    <state width="1398" height="232" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1616897875205" />
     <state width="1398" height="304" key="GridCell.Tab.1.right/0.23.1440.820@0.23.1440.820" timestamp="1611888862841" />
     <state x="308" y="192" key="IDE.errors.dialog" timestamp="1611836326389">
       <screen x="0" y="0" width="1440" height="900" />
@@ -189,14 +198,18 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="229" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1611887267743" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1611928828635">
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1616891097399">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1611928828635" />
-    <state width="720" height="410" key="XDebugger.FullValuePopup" timestamp="1611927492930">
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1616891097399" />
+    <state width="720" height="410" key="XDebugger.FullValuePopup" timestamp="1616897131696">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="720" height="410" key="XDebugger.FullValuePopup/0.0.1440.900@0.0.1440.900" timestamp="1611927492930" />
+    <state width="720" height="410" key="XDebugger.FullValuePopup/0.0.1440.900@0.0.1440.900" timestamp="1616897131696" />
+    <state x="421" y="205" width="598" height="490" key="find.popup" timestamp="1616894529933">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="421" y="205" width="598" height="490" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1616894529933" />
     <state x="627" y="197" width="557" height="525" key="ftp.server.browser" timestamp="1611837702878">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -207,8 +220,23 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/engine/run_RL.py</url>
-          <line>113</line>
+          <line>122</line>
           <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/engine/utils/setting_tools.py</url>
+          <line>89</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/engine/utils/setting_tools.py</url>
+          <line>88</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/engine/algorithms/maxent/maxn.py</url>
+          <line>69</line>
+          <option name="timeStamp" value="30" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -221,7 +249,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/SparseBaseline$main.coverage" NAME="main Coverage Results" MODIFIED="1611928621617" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/engine" />
+    <SUITE FILE_PATH="coverage/SparseBaseline$main.coverage" NAME="main Coverage Results" MODIFIED="1616897875191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/engine" />
     <SUITE FILE_PATH="coverage/SparceBaseLine$main.coverage" NAME="main Coverage Results" MODIFIED="1581912687172" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/engine" />
   </component>
 </project>

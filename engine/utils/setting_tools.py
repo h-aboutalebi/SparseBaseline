@@ -11,6 +11,7 @@ from engine.algorithms.FIGAR.figar import Figar
 from engine.algorithms.SAC.replay_momory import ReplayBuffer_SAC
 from engine.algorithms.SAC.sac import SAC
 from engine.algorithms.SAC_POLYRL.sac_polyRl import SAC_Poly_RL
+from engine.algorithms.maxent.maxn import Maxnet
 
 logger = logging.getLogger(__name__)
 
@@ -62,6 +63,12 @@ def get_agent_type(state_dim, action_dim, max_action, args, env, device):
                     betta = args.betta, epsilon = args.epsilon,sigma_squared = args.sigma_squared, lambda_ = args.lambda_, nb_actions = env.action_space.shape[0],
                     nb_observations =env.observation_space.shape[0], min_action = float(min(env.action_space.low)))
         memory = ReplayBuffer_SAC(args.buffer_size)
+    elif (args.algo == "MAXNET"):
+        agent = Maxnet(state_dim, action_dim, max_action, action_space=env.action_space,
+                    gamma=args.gamma_sac, alpha=args.alpha_sac, tau=args.tau_sac, policy=args.policy_sac, automatic_entropy_tuning=args.automatic_entropy_tuning, device=device, start_steps=args.start_steps,
+                    nb_observations =env.observation_space.shape[0], env=env)
+        memory = ReplayBuffer_SAC(args.buffer_size)
+
     elif (args.algo == "FIGAR"):
         memory = ReplayBuffer(args.buffer_size)
         agent = Figar(state_dim, action_dim, max_action, expl_noise=args.expl_noise,
@@ -79,7 +86,7 @@ def select_action_agent(state, previous_action, tensor_board_writer
     if (type(agent).__name__ == "DDPGPolyRL"):
         return agent.select_action(state, tensor_board_writer=tensor_board_writer, previous_action=previous_action,
                                    step_number=step_number, nb_environment_reset=nb_environment_reset)
-    elif(type(agent).__name__ == "SAC_Poly_RL"):
+    elif(type(agent).__name__ == "SAC_Poly_RL" or type(agent).__name__ == "Maxnet"):
         return agent.mod_select_action(state, tensor_board_writer=tensor_board_writer, previous_action=previous_action,
                                    step_number=step_number, nb_environment_reset=nb_environment_reset)
     else:
