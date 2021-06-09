@@ -6,6 +6,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 import random
+import csv
 
 
 # implements the PolyRL algorithm
@@ -43,9 +44,11 @@ class PolyRL():
         self.eta = None
         self.should_use_target_policy = False
         self.nb_env_is_reset = 0
+        # self.explore_traj_length = 0
 
     def select_action(self, state, previous_action, tensor_board_writer, step_number):
         if (self.t == 0):
+            self.explore_traj_length = 0
             action = torch.Tensor(1, self.nb_actions).uniform_(self.min_action_limit, self.max_action_limit)
             # print('first action is selected at random (must happen ONLY at the beginning of each episode)')
 
@@ -73,6 +76,14 @@ class PolyRL():
 
         else:
             self.number_of_time_target_policy_is_called += 1
+            if step_number <= 100000:
+                time = [self.i]
+                print(time)
+                f = open('Explore_Traj_Length.csv', 'a')
+                with f:
+                    writer = csv.writer(f)
+                    for row in time:
+                        writer.writerow(time)
             # print('target is called (delta_g is NOT in range)')
             # tensor_board_writer.add_scalar('number_of_time_target_policy__exploration_is_called', self.number_of_time_target_policy_is_called / (step_number + 1),
             #                               step_number + 1)

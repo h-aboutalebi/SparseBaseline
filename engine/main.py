@@ -45,7 +45,7 @@ parser.add_argument('--update_interval', type=int, default=1, metavar='N',
 parser.add_argument('--eval_interval', type=int, default=5.0e3, metavar='N',
                     help='how often the target policy is evaluated (default: 5.0e3)')
 
-# *********************************** Reward Sparcity Setting ********************************************
+# *********************************** Reward Sparsity Setting ********************************************
 
 parser.add_argument('--sparse_reward', action='store_true',
                     help='for making reward sparse. Default=False')
@@ -55,9 +55,9 @@ parser.add_argument('--threshold_sparcity', type=float, default=1.15, metavar='G
 
 # *********************************** Algorithm Setting ********************************************
 
-parser.add_argument('--algo', default='FIGAR',
-                    help='Current supported algorithms to use: DDPG | DDPG_DIV | DDPG_PARAM | '
-                         'DDPG_POLYRL | DDPG_NO_NOISE | DDPG_OU_NOISE | SAC | SAC_POLYRL | FIGAR | MAXNET')
+parser.add_argument('--algo', default='DDPG_POLYRL',
+                    help='Current supported algorithms to use: DDPG | DDPG_PARAM | '
+                         'DDPG_POLYRL | DDPG_NO_NOISE | DDPG_OU_NOISE | SAC | SAC_POLYRL | OAC | FIGAR')
 
 # *********************************** DDPG Setting ********************************************
 
@@ -91,12 +91,6 @@ parser.add_argument('--noise_scale', type=float, default=0.3, metavar='G',
 
 parser.add_argument('--initial_stdev', type=float, default=1e-4)
 
-# *********************************** DIV DDPG Setting ********************************************
-
-parser.add_argument('--linear_flag_div', action='store_true')
-
-parser.add_argument('--phi_div', type=float, default=0.5)
-
 # *********************************** Poly_Rl Setting ********************************************
 
 parser.add_argument('--betta', type=float, default=0.0001)
@@ -123,10 +117,22 @@ parser.add_argument('--start_steps', type=int, default=10000,
 
 parser.add_argument('--automatic_entropy_tuning', action='store_true',
                     help='for making reward sparse. Default=False')
+
+# *********************************** Figar Setting ********************************************
+
 parser.add_argument('-w','--w_figar', type=int, default=10,
                     help='FIGAR length of repetition')
 
-# *********************************** SAC_Poly_Rl Setting ********************************************
+parser.add_argument('--epsilon_figar', type=float, default=0.5)
+
+# *********************************** OAC Setting ********************************************
+
+parser.add_argument("--beta_UB_OAC", default=4.66, type=float)
+
+parser.add_argument("--delta_OAC", default=23.53, type=float)
+
+
+
 args = parser.parse_args()
 
 # sets the seed for making it comparable with other implementations

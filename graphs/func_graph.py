@@ -42,7 +42,7 @@ def create_graph(plt, target, plt_figure, y_label, x_label, result_folders, colo
                          facecolor=colors[c], alpha=0.21,
                          linewidth=0)
         dict_results[name_folder] = {"mean": mean, "std": std}
-    plt.legend(loc='lower right')
+    plt.legend(loc='upper left')
     axes = plt.gca()
     plt.savefig(directory_path + '/' + name + '.pdf')
     plt_figure.show()
@@ -63,7 +63,7 @@ def get_result_file(results,path_file,target,smoothness=5):
         y=y_values
     results.append(y)
     #return max_step_nb(example_dict), len(y_values)
-    return max_step_nb(example_dict), 214
+    return max_step_nb(example_dict), 130
 
 def make_smooth_line(list,smoothness):
     ysmoothed = gaussian_filter1d(list, sigma=smoothness)

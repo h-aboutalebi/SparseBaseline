@@ -1,12 +1,15 @@
 import numpy as np
 import torch
+import random
 import torch.nn as nn
 from engine.algorithms.DDPG.ddpg import Critic
 
 from torch.autograd import Variable
 import torch.nn.functional as F
 
-from engine.algorithms.DDPG.ddpg import DDPG
+# from engine.algorithms.DDPG.ddpg import DDPG
+# from engine.algorithms.DDPG_OU_NOISE.ddpg_ou_noise import OUNoise
+from engine.algorithms.DDPG_OU_NOISE.ddpg_ou_noise import DDPG_Ou_Noise
 from engine.algorithms.abstract_agent import AbstractAgent
 
 
@@ -26,13 +29,12 @@ class Actor_repeat(nn.Module):
         x=self.soft(x)
         return torch.argmax(x,dim=1)+1
 
-class Figar(DDPG):
+class Figar(DDPG_Ou_Noise):
 
-    def __init__(self, state_dim, action_dim, max_action, expl_noise, action_high, action_low, tau,device,lr_actor, W=10):
-        super(Figar, self).__init__(state_dim=state_dim, action_dim=action_dim,
-                                    max_action=max_action,device=device,action_high=action_high,
-                                    action_low=action_low,expl_noise=expl_noise,lr_actor=lr_actor,
-                                    tau=tau)
+    def __init__(self, state_dim, action_dim, max_action, expl_noise, action_high, action_low, tau,device,lr_actor,
+                 noise_scale, num_steps, final_noise_scale, W=10, epsilon_figar = 0.5):
+        super(Figar, self).__init__(state_dim, action_dim, max_action, expl_noise, action_high, action_low, tau,device,lr_actor,
+                 noise_scale, num_steps, final_noise_scale)
         action_dim=1+action_dim
         self.actor_repeat = Actor_repeat(state_dim, W).to(self.device)
         self.actor_repeat_target = Actor_repeat(state_dim, W).to(self.device)
@@ -42,16 +44,23 @@ class Figar(DDPG):
         self.critic_target = Critic(state_dim, action_dim).to(self.device)
         self.critic_target.load_state_dict(self.critic.state_dict())
         self.critic_optimizer = torch.optim.Adam(self.critic.parameters(), weight_decay=1e-2)
+        self.W =W
+        self.epsilon = epsilon_figar
 
 
     def select_action(self, state, tensor_board_writer=None, previous_action=None, step_number=None):
         state = np.array(state)
         state = torch.Tensor(state.reshape(1, -1)).to(self.device)
         action1 = self.actor(state).cpu().data.numpy().flatten()
-        if self.expl_noise != 0:
-            action1 = (action1 + np.random.normal(0, self.expl_noise, size=self.action_dim)).clip(
-                self.action_low, self.action_high)
-        action2 = self.actor_repeat(state).cpu().data.numpy().item()
+        # if self.expl_noise != 0:
+        #     action1 = (action1 + np.random.normal(0, self.expl_noise, size=self.action_dim)).clip(
+        #         self.action_low, self.action_high)
+        action1 = action1 + self.action_noise.noise()
+        k = random.uniform(0, 1)
+        if (k <= self.epsilon):
+            action2 = random.randint(1, self.W)
+        else:
+            action2 = self.actor_repeat(state).cpu().data.numpy().item()
         action=(action1,action2)
         return action
 
@@ -76,7 +85,12 @@ class Figar(DDPG):
 
         next_act1=self.actor_target(next_state)
         nextact2=self.actor_repeat_target(next_state)
-        concat_act=torch.cat((next_act1,torch.unsqueeze(nextact2, 1)),dim=1)
+        # if self.device == "cuda":
+        #     nextact2 = nextact2.type(torch.cuda.FloatTensor)
+        # else:
+        #     nextact2 = nextact2.type(torch.FloatTensor)
+        nextact2 = nextact2.to(dtype = torch.float)
+        concat_act=torch.cat([next_act1, torch.unsqueeze(nextact2, 1)], dim=1)
         # Compute the target Q value
         target_Q = self.critic_target(next_state, concat_act)
         target_Q = reward + (done * gamma * target_Q).detach()
@@ -94,8 +108,15 @@ class Figar(DDPG):
         self.critic_optimizer.step()
 
         # Compute actor loss
-        act1 = self.actor_target(state)
-        act2 = self.actor_repeat_target(state)
+        # act1 = self.actor_target(state)
+        # act2 = self.actor_repeat_target(state)
+        act1 = self.actor(state)
+        act2 = self.actor_repeat(state)
+        # if self.device == "cuda":
+        #     act2 = act2.type(torch.cuda.FloatTensor)
+        # else:
+        #     act2 = act2.type(torch.FloatTensor)
+        act2 = act2.to(dtype = torch.float)
         concat_act3=torch.cat((act1,torch.unsqueeze(act2, 1)),dim=1)
         actor_loss = -self.critic(state, concat_act3).mean()
 

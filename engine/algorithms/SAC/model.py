@@ -49,7 +49,7 @@ class QNetwork(nn.Module):
         self.apply(weights_init_)
 
     def forward(self, state, action):
-        xu = torch.cat([state, action], 1)
+        xu = torch.cat([state, action], dim = 1)
 
         x1 = F.relu(self.linear1(xu))
         x1 = F.relu(self.linear2(x1))

@@ -51,29 +51,22 @@ class Run_RL():
                         self.nb_env_reset, step_number, total_reward - previous_total_reward, total_modified_reward - previous_total_modified_reward))
                 previous_total_reward = total_reward
                 previous_total_modified_reward = total_modified_reward
-                state = self.env.reset()
-                if (self.agent.__class__.__name__ is not "Maxnet"):
-                    states.append(state)
-                else:
-                    states.append(self.agent.discretize_state_normal(state))
+                states.append(self.env.reset())
                 self.initial_x = get_current_pose(self.env)
                 env_is_reset = False
             # update_parameters()
             action = select_action_agent(state=states[-1], previous_action=actions[-1], tensor_board_writer=writer
                                          , step_number=step_number, nb_environment_reset=self.nb_env_reset, agent=self.agent)
-            if(self.agent.__class__.__name__ is "Maxnet"):
+            if(self.agent.__class__.__name__ is not "Figar"):
                 next_state, reward, done, info_ = self.env.step(action)
-                next_state=self.agent.discretize_state_normal(next_state)
-            elif(self.agent.__class__.__name__ is not "Figar"):
-                next_state, reward, done, info_ = self.env.step(action)
-            elif(self.agent.__class__.__name__ is  "Figar"):
-                total_reward=0
+            else:
+                total_fig_reward=0
                 for intra_step in range(action[1]):
                     next_state, reward, done, info_ = self.env.step(action[0])
-                    total_reward+=self.gamma**(intra_step)*reward
+                    total_fig_reward+=self.gamma**(intra_step)*reward
                     if(done):
                         break
-                reward=total_reward
+                reward=total_fig_reward
             post_update_agent(agent=self.agent, previous_state=states[-1], next_state=next_state,
                               done=done, step_number=step_number, writer=writer)
             if (done):
@@ -110,8 +103,6 @@ class Run_RL():
         if self.timesteps_since_eval >= self.eval_interval:
             logger.info("Evaluating target policy ...")
             state = self.env.reset()
-            if (self.agent.__class__.__name__ is "Maxnet"):
-                state=self.agent.discretize_state_normal(state)
             self.initial_x = get_current_pose(self.env)
             actions = [None]
             self.timesteps_since_eval = 0
@@ -122,8 +113,6 @@ class Run_RL():
                     state, reward, done, info_ = self.env.step(action)
                 else:
                     state, reward, done, info_ = self.env.step(action[0])
-                if (self.agent.__class__.__name__ is "Maxnet"):
-                    state=self.agent.discretize_state_normal(state)
                 total_reward += reward
                 actions.append(action)
                 modified_reward = self.reward_modifier.make_reward_sparse(reward, self.initial_x)

@@ -30,7 +30,8 @@ class OUNoise:
 
 class DDPG_Ou_Noise(DDPG):
 
-    def __init__(self, state_dim, action_dim, max_action, expl_noise, action_high, action_low, tau,device,lr_actor,noise_scale,num_steps,final_noise_scale):
+    def __init__(self, state_dim, action_dim, max_action, expl_noise, action_high, action_low, tau,device,lr_actor,
+                 noise_scale, num_steps, final_noise_scale):
         super(DDPG_Ou_Noise, self).__init__(state_dim=state_dim, action_dim=action_dim,
                                     max_action=max_action,device=device,action_high=action_high,
                                     action_low=action_low,expl_noise=expl_noise,lr_actor=lr_actor,
